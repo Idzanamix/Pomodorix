@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--headerColor);
+  box-shadow: 0 10px 63px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.nav {
+  max-width: 1440px;
+  width: 100%;
+  padding: 15px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: var(--headerColor);
+}
+
+@media(max-width: 1024px) {
+  .nav {
+    padding: 15px 40px;
+  }
+
+  .nav button,
+  .nav a {
+    font-size: 18px;
+  }
+
+  .nav a svg,
+  .nav button svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media(max-width: 568px) {
+  .nav {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .nav a {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .nav a svg,
+  .nav button svg {
+    width: 20px;
+    height: 20px;
+  }
+}

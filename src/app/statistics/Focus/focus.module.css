@@ -1,0 +1,77 @@
+.focus {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  grid-area: 7 / 1 / 9 / 5;
+}
+
+.focus svg {
+  min-width: 129px;
+  min-height: 129px;
+}
+
+.svgColor.focus svg * {
+  stroke: var(--focusSvg);
+}
+
+.descr {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 137%;
+  color: var(--gray);
+}
+
+.value {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 64px;
+}
+
+@media(max-width: 1366px) {
+  .descr {
+    font-size: 18px;
+  }
+
+  .value {
+    font-size: 34px;
+  }
+
+  .focus svg {
+    height: 80px;
+    width: 80px;
+    min-width: 80px;
+    min-height: 80px;
+  }
+}
+
+@media(max-width: 1024px) {
+  .focus {
+    grid-area: 8 / 1 / 9 / 14;
+  }
+}
+
+@media(max-width: 768px) {
+  .descr {
+    font-size: 16px;
+    gap: 5px;
+  }
+
+  .value {
+    font-size: 24px;
+  }
+
+  .focus {
+    padding: 15px;
+  }
+
+  .focus svg {
+    height: 40px;
+    width: 40px;
+    min-width: 50px;
+    min-height: 50px;
+  }
+}

@@ -1,0 +1,172 @@
+.modal {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--modalBackground);
+  animation: ani .3s forwards;
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 83px;
+  position: relative;
+  background: var(--background);
+  filter: drop-shadow(0px 0px 10px rgba(146, 136, 136, 0.7));
+  border-radius: 5px;
+}
+
+.descr {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 71%;
+  margin-bottom: 40px;
+  color: var(--gray);
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.saveButton {
+  background: var(--colorButton);
+  padding: 19px 50px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 106%;
+  text-align: center;
+  color: var(--background);
+  transition: background-color .15s ease-in-out;
+}
+
+.saveButton:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+.saveButton:disabled:hover {
+  background: var(--colorButton);
+}
+
+.defaultButton {
+  border: 2px solid var(--red);
+  padding: 19px 50px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 106%;
+  text-align: center;
+  color: var(--red);
+  transition: background-color .15s ease-in-out, color .15s ease-in-out;
+}
+
+.cancelButton {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 106%;
+  color: var(--gray);
+  border-bottom: 1px solid var(--gray);
+  transition: border-color .15s ease-in-out;
+}
+
+.closeButton {
+  padding: 5px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 71%;
+  margin-bottom: 25px;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 106%;
+  color: var(--gray);
+  min-height: 55px;
+  background: var(--whiteF4);
+  outline: none;
+  border: none;
+  border: 1px solid var(--whiteF4);
+  transition: border-color .15s ease-in-out;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media (hover:hover) {
+  .saveButton:hover {
+    background-color: var(--colorButtonHover);
+  }
+
+  .cancelButton:hover {
+    border-color: transparent;
+  }
+
+  .defaultButton:hover {
+    background-color: var(--buttonHover);
+    color: var(--background);
+  }
+}
+
+@media(max-width: 768px) {
+  .body {
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .descr {
+    font-size: 24px;
+    margin-bottom: 25px;
+    margin-right: auto;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .input {
+    font-size: 18px;
+    line-height: 100%;
+    min-height: 35px;
+  }
+
+  .saveButton,
+  .defaultButton {
+    padding: 15px 20px;
+    font-size: 14px;
+    line-height: 100%;
+    word-wrap: nowrap;
+  }
+
+}

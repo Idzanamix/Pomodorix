@@ -1,0 +1,134 @@
+.dropdownList {
+  position: absolute;
+  padding-top: 12.5px;
+  padding-bottom: 12.5px;
+  background: var(--background);
+  filter: drop-shadow(0px 0px 10px rgba(146, 136, 136, 0.7));
+  border-radius: 10px;
+  z-index: 1000;
+  animation: ani .3s forwards;
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.item,
+.item button {
+  padding: 12.5px 40px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  transition: background-color .15s ease-in-out;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: var(--whiteE4);
+}
+
+.item:first-child {
+  align-self: center;
+  justify-self: start;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+
+.input {
+  width: 100%;
+  margin-left: 3px;
+  appearance: none;
+  background: var(--grayC4);
+  border-radius: 10px;
+  padding: 2px;
+  transition: opacity .15s ease-in-out;
+  cursor: pointer;
+}
+
+.input:hover {
+  opacity: .7;
+}
+
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: var(--colorButton);
+  border-radius: 50%;
+}
+
+.input::-webkit-slider-thumb:hover {
+  background-color: var(--colorButtonHover);
+}
+
+.input::-webkit-slider-thumb {
+  accent-color: var(--red);
+}
+
+.output {
+  font-weight: 500;
+  color: var(--background);
+  background-color: var(--colorButton);
+  border-radius: 3px;
+  padding: 3px 7px;
+  width: 40px;
+  text-align: center;
+}
+
+@media(max-width:768px) {
+  .dropdownList {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: fixed;
+    width: 100%;
+    transform: translateY(150%);
+    bottom: 0;
+    border-radius: 20px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    animation: ani .3s forwards;
+  }
+
+  @keyframes ani {
+    0% {
+      transform: translateY(120%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .item,
+  .item button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,26 @@
+.button {
+  margin-left: auto;
+  padding: 10px;
+  border-radius: 30%;
+  transition: background-color .15s ease-in-out;
+  position: relative;
+}
+
+.button:focus-visible {
+  background-color: var(--whiteE4);
+}
+
+.button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  background-color: transparent;
+}
+
+@media(hover:hover) {
+  .button:hover {
+    background-color: var(--menuButtonHover);
+  }
+}

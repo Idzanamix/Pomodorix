@@ -1,0 +1,26 @@
+.link {
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  text-align: center;
+  transition: .15s color ease-in-out;
+}
+
+.link svg {
+  fill: var(--red);
+  transition: .15s fill ease-in-out;
+}
+
+@media(hover:hover) {
+  .link:hover {
+    color: var(--buttonHover);
+  }
+
+  .link:hover svg {
+    fill: var(--buttonHover);
+  }
+}

@@ -1,0 +1,38 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--gray);
+  margin-bottom: 25px;
+}
+
+.item {
+  display: flex;
+}
+
+.item::before {
+  content: "🍅";
+  padding-right: 10px;
+  font-size: 16px;
+}
+
+.descr {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--gray);
+  line-height: 106%;
+  margin-bottom: 15px;
+}
+
+@media(max-width: 1366px) {
+  .list {
+    font-size: 14px;
+  }
+
+  .descr {
+    font-size: 18px;
+  }
+}
