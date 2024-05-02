@@ -50,6 +50,7 @@ export interface ITimerMinute {
   currentWeekDay: number;
   statistics: any;
   logs: IStatistics;
+  addedMinutesCount: number;
 }
 
 export interface ITodoState {
@@ -81,6 +82,7 @@ const initialState: ITodoState = {
     currentWeekDay: 1,
     statistics: [],
     logs: [],
+    addedMinutesCount: 0
   },
   todos: [],
 }
@@ -97,13 +99,15 @@ export function resetInitialState(state: ITodoState) {
     isPause,
     isStarted,
     worldTimeStarted,
-    wotldTimePauseStarted } = initialState.timerMinute;
+    wotldTimePauseStarted,
+    addedMinutesCount } = initialState.timerMinute;
   state.timerMinute.sumTime = sumTime;
   state.timerMinute.isBreak = isBreak;
   state.timerMinute.isPause = isPause;
   state.timerMinute.isStarted = isStarted;
   state.timerMinute.worldTimeStarted = worldTimeStarted;
   state.timerMinute.wotldTimePauseStarted = wotldTimePauseStarted;
+  state.timerMinute.addedMinutesCount = addedMinutesCount;
 };
 
 const todosSlice = createSlice({
@@ -266,50 +270,6 @@ const todosSlice = createSlice({
       const length = 21;
       let dayNow = lastDayOfTheWeek;
       let weekDay = 1;
-      // const logs: IStatistics = {
-      //   19835: {
-      //     weekDay: 1,
-      //     sumPauseTime: 234,
-      //     sumWorkTime: .5 * 60 * 60 + 45 * 60,
-      //     sumTomatoCount: 123,
-      //     stops: 323,
-      //     lastTimer: 0,
-      //   },
-      //   19836: {
-      //     weekDay: 1,
-      //     sumPauseTime: 234,
-      //     sumWorkTime: .3 * 60 * 60,
-      //     sumTomatoCount: 123,
-      //     stops: 323,
-      //     lastTimer: 0,
-      //   },
-      //   19837: {
-      //     weekDay: 1,
-      //     sumPauseTime: 234,
-      //     sumWorkTime: .9 * 60 * 60,
-      //     sumTomatoCount: 123,
-      //     stops: 323,
-      //     lastTimer: 0,
-      //   },
-      //   19825: {
-      //     weekDay: 1,
-      //     sumPauseTime: 234,
-      //     sumWorkTime: .9 * 60 * 60,
-      //     sumTomatoCount: 123,
-      //     stops: 323,
-      //     lastTimer: 0,
-      //   },
-      //   19821: {
-      //     weekDay: 1,
-      //     sumPauseTime: 234,
-      //     sumWorkTime: .9 * 60 * 60,
-      //     sumTomatoCount: 123,
-      //     stops: 323,
-      //     lastTimer: 0,
-      //   },
-      // }
-
-      // console.log(lastDay);
 
       const statistics = [...new Array(length)].map(() => {
         const currentDay = dayNow--;
@@ -406,6 +366,14 @@ const todosSlice = createSlice({
     },
     setWeekDay({ timerMinute }, action: PayloadAction<number>) {
       timerMinute.currentWeekDay = action.payload;
+    },
+    setOneMinutePlus({ timerMinute }) {
+      timerMinute.worldTimeStarted = timerMinute.worldTimeStarted + 60;
+      timerMinute.currentTimer = timerMinute.currentTimer + 60;
+      timerMinute.addedMinutesCount = timerMinute.addedMinutesCount + 1;
+    },
+    resetOneMinutePlus({ timerMinute }) {
+      timerMinute.addedMinutesCount = initialState.timerMinute.addedMinutesCount;
     }
   }
 });
@@ -440,5 +408,7 @@ export const {
   setWorkLogs,
   setTomatoLogs,
   setCurrentWeek,
-  setWeekDay } = todosSlice.actions;
+  setWeekDay,
+  setOneMinutePlus,
+  resetOneMinutePlus } = todosSlice.actions;
 

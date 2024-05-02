@@ -61,6 +61,8 @@ export const selectWeek = (({ todos: { timerMinute: { currentWeek } } }: rootSta
 
 export const selectWeekDay = (({ todos: { timerMinute: { currentWeekDay } } }: rootStateType) => currentWeekDay);
 
+export const selectAddedMinutesCount = (({ todos: { timerMinute: { addedMinutesCount } } }: rootStateType) => addedMinutesCount);
+
 
 
 

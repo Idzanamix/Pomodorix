@@ -7,10 +7,11 @@ import { formatTime } from '../../utils/formatTime';
 import { RandomWordsDescr } from '../RandomWordsDescr';
 import { setStopScroll } from '../../utils/setStopScroll';
 import { setNotification } from '../../utils/setNotification';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { setTimerSettingsModalIsOpen } from '../../storeRedux/page/pageSlice';
 import { updateTimerAfterLogout } from '../../storeRedux/todos/mutateTimerMinute';
 import {
+  selectAddedMinutesCount,
   selectCurrentTimer,
   selectCurrentTodo,
   selectCurrentTomato,
@@ -28,6 +29,7 @@ import {
 } from '../../storeRedux/storeSelectors';
 import {
   addCurrentTomatoNumber,
+  resetOneMinutePlus,
   resetSumTime,
   returnTimeAfterPause,
   setCurrentTomatoNumber,
@@ -35,6 +37,7 @@ import {
   setIsFinished,
   setIsPause,
   setIsStarted,
+  setOneMinutePlus,
   setPauseLogs,
   setStopLogs,
   setTimer,
@@ -59,6 +62,7 @@ export function Timer() {
   const isNotification = useAppSelector(selectNotifications);
   const notificationTime = useAppSelector(selectNotificationTime);
   const isNotFinishedTodo = useAppSelector(selectIsNotFinishedTodo);
+  const addedMinutesCount = useAppSelector(selectAddedMinutesCount);
   const { currentNumberTomato, isBreak, shortBreak } = timerMinute;
   const currentTodo = useAppSelector(selectCurrentTodo(currentNumberTomato));
   const currentTodoIndex = useAppSelector(selectIndex(currentTodo?.id || ''));
@@ -75,14 +79,14 @@ export function Timer() {
   const secondRightNumber = formatedTimerString.substring(1, 2);
   const firstLeftNumber = formatedTimerString.substring(3, 4);
   const secondLeftNumber = formatedTimerString.substring(4, 5);
-  const loaderWidth = currentTimer / (initialTimer / 100);
+  const loaderWidth = currentTimer / ((initialTimer + (addedMinutesCount || 0) * 60) / 100);
   const notificationText = isBreak
     ? 'Перерыв окончен'
     : currentTodo?.currentSumTomatoCount === currentTomato?.tomatoNumber
       ? `${currentTodo?.text} - Готово!`
       : `Помидор ${currentNumberTomato} выполнен!`;
   const numberAnimation = isAnimation ? isStarted && !isPause ? '' : 'none' : 'none';
-  const numberAnimationFirst = isAnimation ? isStarted && !isPause ? ' ' + styles.animationFirst : '' : ''
+  const numberAnimationFirst = isAnimation ? isStarted && !isPause ? ' ' + styles.animationFirst : '' : '';
 
   const timesUp = useCallback(() => {
     if (!currentTodo || !isNotFinishedTodo) return;
@@ -92,6 +96,7 @@ export function Timer() {
     dispatch(setIsStarted(false));
     dispatch(setIsPause(false));
     dispatch(setWorkLogs());
+    dispatch(resetOneMinutePlus());
     !isBreak && dispatch(setTomatoLogs());
     isBreak && dispatch(setCurrentTomatoNumber());
 
@@ -200,12 +205,12 @@ export function Timer() {
     dispatch(setIsStarted(false));
     dispatch(setIsPause(false));
     dispatch(setTimer((initialTimer)));
+    dispatch(resetOneMinutePlus());
     clearInterval(interval);
   }
 
-  function openModal() {
-    setStopScroll(true);
-    dispatch(setTimerSettingsModalIsOpen(true));
+  function clickOnPlus() {
+    isStarted && dispatch(setOneMinutePlus());
   }
 
   return mounted && (
@@ -289,7 +294,8 @@ export function Timer() {
             </div>}
           <button
             className={styles.button}
-            onClick={openModal}
+            onClick={clickOnPlus}
+            disabled={isStarted ? false : true}
           >
             <IconBigPlus />
           </button>

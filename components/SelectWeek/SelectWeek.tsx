@@ -26,13 +26,17 @@ export function SelectWeek({ weekNumber }: ISelectWeek) {
   useModalCloser({ ref: refSelectButton, onClose: handleClose, ref2: refDropdown });
   useResizeCloser(() => setIsOpen(false));
 
+  function handleClick() {
+    setIsOpen(!isOpen);
+  }
+
   function handleClose() {
     setIsOpen(false);
   }
 
-  function handleClick() {
-    setIsOpen(!isOpen);
+  function handleClickCurrent() {
     dispatch(setCurrentWeek(1));
+    setIsOpen(false);
   }
 
   function handleClickPrewWeek() {
@@ -70,18 +74,27 @@ export function SelectWeek({ weekNumber }: ISelectWeek) {
         ref={refDropdown}
         className={styles.dropdown}
       >
-        <button
-          className={styles.button}
-          onClick={handleClickPrewWeek}
-        >
-          Предыдущая неделя
-        </button>
-        <button
-          className={styles.button}
-          onClick={handleClickPrewTwoWeeks}
-        >
-          2 недели назад
-        </button>
+        {weekNumber !== 1 &&
+          <button
+            className={styles.button}
+            onClick={handleClickCurrent}
+          >
+            Текущая неделя
+          </button>}
+        {weekNumber !== 2 &&
+          <button
+            className={styles.button}
+            onClick={handleClickPrewWeek}
+          >
+            Предыдущая неделя
+          </button>}
+        {weekNumber !== 3 &&
+          <button
+            className={styles.button}
+            onClick={handleClickPrewTwoWeeks}
+          >
+            2 недели назад
+          </button>}
       </div>, root)}
   </>)
 }

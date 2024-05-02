@@ -188,6 +188,34 @@
   transition: fill .15s ease-in-out;
 }
 
+.button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.button:active {
+  animation: activeClick .3s forwards;
+}
+
+@keyframes activeClick {
+  0% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.1;
+  }
+
+  100% {
+    scale: 1;
+  }
+
+}
+
+.button:disabled:hover svg {
+  fill: var(--grayC4);
+}
+
 .button:focus-visible svg {
   fill: var(--colorButtonHover);
 }
