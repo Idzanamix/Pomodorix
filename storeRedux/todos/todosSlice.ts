@@ -21,15 +21,17 @@ export interface ITodosState {
   tomatos: ITomato[];
 }
 
+export interface IStatisticsItem {
+  weekDay: number;
+  sumPauseTime: number;
+  sumWorkTime: number;
+  sumTomatoCount: number;
+  stops: number;
+  lastTimer: number;
+}
+
 export interface IStatistics {
-  [k: number]: {
-    weekDay: number;
-    sumPauseTime: number;
-    sumWorkTime: number;
-    sumTomatoCount: number;
-    stops: number;
-    lastTimer: number;
-  }
+  [k: number]: IStatisticsItem;
 }
 
 export interface ITimerMinute {
