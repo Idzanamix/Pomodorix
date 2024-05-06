@@ -370,9 +370,11 @@ const todosSlice = createSlice({
       timerMinute.currentWeekDay = action.payload;
     },
     setOneMinutePlus({ timerMinute }) {
+      const dayNow = setDaysNow();
       timerMinute.worldTimeStarted = timerMinute.worldTimeStarted + 60;
       timerMinute.currentTimer = timerMinute.currentTimer + 60;
       timerMinute.addedMinutesCount = timerMinute.addedMinutesCount + 1;
+      timerMinute.logs[dayNow].lastTimer = timerMinute.logs[dayNow].lastTimer + 60;
     },
     resetOneMinutePlus({ timerMinute }) {
       timerMinute.addedMinutesCount = initialState.timerMinute.addedMinutesCount;
@@ -412,5 +414,6 @@ export const {
   setCurrentWeek,
   setWeekDay,
   setOneMinutePlus,
-  resetOneMinutePlus } = todosSlice.actions;
+  resetOneMinutePlus
+} = todosSlice.actions;
 
